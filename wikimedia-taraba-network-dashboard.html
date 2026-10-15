@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1A365D">
+<title>Wikimedia Taraba Network — Reports</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#172033;background:#f7fafc}*{box-sizing:border-box}body{margin:0}.top{background:#1a365d;color:#fff;padding:22px max(18px,calc((100% - 1050px)/2))}.brand{font-size:13px;opacity:.85}.top h1{margin:10px 0 5px;font-size:27px}.top p{margin:0;color:#dbe7f4;font-size:13px}.wrap{max-width:1050px;margin:auto;padding:22px 16px}.notice{background:#edf5fb;border:1px solid #d8e7f4;border-radius:10px;padding:14px;margin-bottom:18px;font-size:12px;line-height:1.6}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat,.panel{background:#fff;border:1px solid #e3e9ef;border-radius:11px;padding:17px}.stat span{display:block;color:#748094;font-size:12px}.stat strong{display:block;font-size:26px;margin-top:8px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.panel{padding:0;margin-bottom:18px;overflow:hidden}.panel-head{padding:17px;border-bottom:1px solid #edf0f4}.panel-head h2{font-size:16px;margin:0}.panel-head p{font-size:12px;color:#7b8797;margin:6px 0 0}.btn{border:0;border-radius:8px;background:#1a365d;color:white;padding:11px 14px;font-weight:bold;font-size:12px}.btn.secondary{background:white;border:1px solid #d7dfe8;color:#344054}.form{padding:17px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-size:12px;font-weight:bold;color:#475467;display:flex;flex-direction:column;gap:6px}.form input,.form select,.form textarea,.filters input,.filters select{width:100%;padding:10px;border:1px solid #d7dfe8;border-radius:7px;background:white;font:inherit;font-size:12px}.form textarea{resize:vertical}.wide{grid-column:1/-1}.actions{display:flex;justify-content:flex-end;gap:8px}.filters{padding:13px 17px;display:flex;gap:10px}.filters input{flex:1}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:700px}th,td{text-align:left;border-bottom:1px solid #edf0f4;padding:13px 15px;font-size:12px}th{font-size:10px;text-transform:uppercase;color:#7e8998;background:#fafbfd}td{color:#657184}.title{font-weight:bold;color:#243247}.sub{font-size:10px;color:#8995a4;margin-top:4px}.pill{display:inline-block;border-radius:5px;padding:5px 7px;font-size:10px;font-weight:bold;background:#edf3fa;color:#315c8b}.pill.Approved{background:#e7f4ed;color:#27714d}.pill.Under-review{background:#fff4db;color:#946200}.pill.Needs-changes{background:#fdecec;color:#a33b3b}.status{font-size:11px;max-width:130px;padding:7px;border:1px solid #d7dfe8;border-radius:6px;background:#fff}.foot{font-size:10px;text-align:center;color:#8b96a6;padding:10px}.hidden{display:none!important}.empty{text-align:center;padding:28px;color:#8793a3;font-size:12px}@media(max-width:600px){.top h1{font-size:23px}.stats{grid-template-columns:1fr}.stat{padding:13px}.stat strong{font-size:22px}.row{align-items:flex-start;flex-direction:column}.row .btn{width:100%}.form{grid-template-columns:1fr}.wide{grid-column:auto}.filters{flex-direction:column}.panel-head{padding:15px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">COMMUNITY ACTIVITY TRACKER</div><h1>Wikimedia Taraba Network</h1><p>Activity reporting dashboard · Submit, track and review contributions</p></header>
+<main class="wrap">
+<div class="notice"><b>Welcome to the community reporting workspace.</b><br>Submit activity reports for Wikipedia, Wikidata, Wikimedia Commons, outreach and training. This standalone version stores reports in this browser on this device; it does not automatically share them with other members.</div>
+<section class="stats"><div class="stat"><span>Total reports</span><strong id="total">0</strong></div><div class="stat"><span>Awaiting review</span><strong id="pending">0</strong></div><div class="stat"><span>Approved</span><strong id="approved">0</strong></div></section>
+<section class="panel"><div class="panel-head row"><div><h2>Submit an activity report</h2><p>Fill in the details below and save your report.</p></div><button class="btn" id="toggle">＋ New report</button></div>
+<form id="form" class="form hidden">
+<label>Member name<input name="member" required placeholder="Your full name"></label>
+<label>Activity title<input name="title" required placeholder="What did you do?"></label>
+<label>Category<select name="category"><option>Wikipedia</option><option>Wikidata</option><option>Wikimedia Commons</option><option>Community outreach</option><option>Training / workshop</option><option>Other</option></select></label>
+<label>Activity date<input name="date" type="date" required></label>
+<label class="wide">Description<textarea name="description" rows="3" required placeholder="Describe the activity and its outcome."></textarea></label>
+<label class="wide">Evidence link (optional)<input name="evidence" type="url" placeholder="https://..."></label>
+<div class="wide actions"><button type="button" class="btn secondary" id="cancel">Cancel</button><button class="btn" type="submit">Save report</button></div>
+</form></section>
+<section class="panel"><div class="panel-head"><div class="row"><div><h2>Activity reports</h2><p>Search submissions and update their review status on this device.</p></div><button class="btn secondary" id="export">Export CSV</button></div></div>
+<div class="filters"><input id="search" placeholder="Search activity, member or category"><select id="filter"><option>All statuses</option><option>Submitted</option><option>Under review</option><option>Approved</option><option>Needs changes</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Activity</th><th>Member</th><th>Date</th><th>Status</th><th>Update status</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty hidden">No reports found. Submit a report or change your search.</div></div>
+</section>
+<div class="foot">Wikimedia Taraba Network · Reporting dashboard starter</div>
+</main>
+<script>
+const KEY='tarabaNetworkReportsV1';
+let reports=[];try{reports=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+const $=id=>document.getElementById(id);
+$('form').elements.date.value=new Date().toISOString().slice(0,10);
+function save(){localStorage.setItem(KEY,JSON.stringify(reports));render()}
+function render(){
+$('total').textContent=reports.length;
+$('pending').textContent=reports.filter(r=>r.status==='Submitted'||r.status==='Under review').length;
+$('approved').textContent=reports.filter(r=>r.status==='Approved').length;
+const q=$('search').value.toLowerCase(), f=$('filter').value;
+const filtered=reports.filter(r=>(f==='All statuses'||r.status===f)&&[r.member,r.title,r.category,r.description].join(' ').toLowerCase().includes(q));
+$('rows').innerHTML=filtered.map(r=>`<tr><td><div class="title">${esc(r.title)}</div><div class="sub">${esc(r.category)}</div>${r.evidence?`<div class="sub"><a target="_blank" rel="noopener" href="${esc(r.evidence)}">Evidence link ↗</a></div>`:''}</td><td>${esc(r.member)}</td><td>${esc(r.date)}</td><td><span class="pill ${r.status.replaceAll(' ','-')}">${esc(r.status)}</span></td><td><select class="status" data-id="${r.id}" aria-label="Update report status"><option ${r.status==='Submitted'?'selected':''}>Submitted</option><option ${r.status==='Under review'?'selected':''}>Under review</option><option ${r.status==='Approved'?'selected':''}>Approved</option><option ${r.status==='Needs changes'?'selected':''}>Needs changes</option></select></td></tr>`).join('');
+$('empty').classList.toggle('hidden',filtered.length!==0);
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('toggle').onclick=()=>{$('form').classList.toggle('hidden');$('form').scrollIntoView({behavior:'smooth',block:'start'})};
+$('cancel').onclick=()=>$('form').classList.add('hidden');
+$('form').onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));reports.unshift({...d,id:Date.now(),status:'Submitted'});save();e.target.reset();e.target.elements.date.value=new Date().toISOString().slice(0,10);$('form').classList.add('hidden');alert('Report saved in this browser on this device.')};
+$('rows').onchange=e=>{if(e.target.matches('select[data-id]')){const r=reports.find(x=>String(x.id)===e.target.dataset.id);if(r){r.status=e.target.value;save()}}};
+$('search').oninput=render;$('filter').onchange=render;
+$('export').onclick=()=>{const cols=['member','title','category','date','description','evidence','status'];const q=$('search').value.toLowerCase(),f=$('filter').value;const list=reports.filter(r=>(f==='All statuses'||r.status===f)&&[r.member,r.title,r.category,r.description].join(' ').toLowerCase().includes(q));const csv=[cols.join(','),...list.map(r=>cols.map(k=>'"'+String(r[k]||'').replaceAll('"','""')+'"').join(','))].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='wikimedia-taraba-reports.csv';a.click();URL.revokeObjectURL(a.href)};
+render();
+</script>
+</body>
+</html>
